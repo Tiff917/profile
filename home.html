@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>home</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html, body {
+      height: 100%;
+      font-family: Arial, sans-serif;
+      background-image: url("img/IMG_5046 2.png");
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+      background-position: center;
+      filter: brightness(80%) contrast(100%);
+      color: #c7c3be;
+    }
+
+    .section {
+      width: 100%;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 40px;
+      color: #c7c3be;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .section-1 h1 {
+      font-size: 120px;
+      margin: 20px 0;
+    }
+
+    .section h2 {
+      font-size: 60px;
+      margin: 10px 0;
+      color: #c7c3be;
+    }
+
+    .content-wrapper {
+      max-width: 1200px;
+      margin: 0 auto;
+      width: 100%;
+      display: flex;
+      gap: 40px;
+      flex-wrap: wrap;
+    }
+
+    .text-box {
+      flex: 1;
+      min-width: 200px;
+      max-width: 500px;
+      margin-right: 30px;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+    }
+
+    .text-box h2 {
+      font-size: 65px;
+      margin-bottom: 20px;
+    }
+
+    .text-box p {
+      font-size: 20px;
+      line-height: 1.6;
+      letter-spacing: 0.15em;
+      color: #e0ddd7;
+    }
+
+    .image-box {
+      flex: 0 0 600px;
+      height: 120%;
+      overflow: hidden;
+      border-radius: 50px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+      position: relative;
+      cursor: pointer;
+      transition: transform 0.4s ease;
+      z-index: 1;
+    }
+
+    .image-box img {
+      width: 100%;
+      height: 100%;
+      display: block;
+      object-fit: contain;
+    }
+
+    /* 點擊放大效果 */
+    .image-box.expanded {
+      transform: scale(1.25);
+      z-index: 10;
+    }
+
+    .section-3 {
+      align-items: flex-start;
+      padding-top: 60px;
+      width: 100%;
+    }
+
+    .section-3 .content-wrapper {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 30px;
+      padding-right: 30px;
+    }
+
+    .section-3 .text-box {
+      margin-right: 0;
+      max-width: 500px;
+      text-align: left;
+    }
+
+    .cards-wrapper {
+      width: 100%;
+      display: flex;
+      gap: 60px;
+      justify-content: flex-start;
+      flex-wrap: nowrap;
+    }
+
+    .card {
+      background-color: rgba(0, 0, 0, 0.5);
+      padding: 30px;
+      border-radius: 25px;
+      flex: 1 1 0;
+      min-width: 0;
+      max-width: 33.33%;
+      color: #c7c3be;
+      text-decoration: none;
+      box-shadow: 0 3px 8px rgba(0,0,0,0.3);
+      transition: background-color 0.3s ease;
+      display: flex;
+      flex-direction: column;
+      cursor: pointer;
+    }
+
+    .card:hover {
+      background-color: rgba(0, 0, 0, 0.8);
+    }
+
+    .card-title {
+      font-size: 35px;
+      margin-bottom: 12px;
+      padding-bottom: 6px;
+    }
+
+    .card-divider {
+      height: 3px;
+      width: 50px;
+      background-color: #c7c3be;
+      margin-bottom: 20px;
+      border-radius: 2px;
+    }
+
+    .card-content {
+      font-size: 18px;
+      line-height: 1.5;
+      text-align: justify;
+      flex-grow: 1;
+    }
+
+    @media (max-width: 768px) {
+      .content-wrapper {
+        flex-direction: column;
+        align-items: center;
+        padding-left: 0;
+        padding-right: 0;
+      }
+
+      .image-box {
+        width: 100%;
+        max-width: 300px;
+        height: 300px;
+        overflow: hidden;
+        border-radius: 20px;
+      }
+
+      .text-box {
+        border-radius: 20px;
+        text-align: center;
+        margin-right: 0;
+        max-width: 100%;
+      }
+
+      .cards-wrapper {
+        flex-direction: column;
+        max-width: 100%;
+      }
+
+      .card {
+        max-width: 100%;
+        margin-bottom: 20px;
+      }
+
+      .section-3 .content-wrapper {
+        padding-left: 0;
+        padding-right: 0;
+        align-items: center;
+      }
+
+      .section-3 .text-box {
+        max-width: 100%;
+        text-align: center;
+      }
+
+      .section-3 h2 {
+        text-align: center;
+      }
+    }
+
+    /* 半透明遮罩加在每個 .section 上 */
+  .section {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .section::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(78, 77, 77, 0.4); /* 半透明黑 */
+    z-index: 0;
+  }
+
+  .section > * {
+    position: relative;
+    z-index: 1;
+  }
+
+  </style>
+</head>
+<body>
+
+  <!-- 區塊 1 -->
+  <div class="section section-1">
+    <h2>Welcome to</h2>
+    <h1>Tiffany's</h1>
+    <h2>Profile</h2>
+  </div>
+
+  <!-- 區塊 2：自我介紹 -->
+  <div class="section section-2">
+    <div class="content-wrapper">
+      <div class="text-box">
+        <h2>About me</h2>
+        <p>
+          這是我與所愛之物的深刻連結：在書頁間漫遊思想，從花束中讀懂自然的詩句，更沉醉於顏料流淌的創作魔法。當色彩從管中擠出、在畫布綻放成花束的瞬間，平凡便轉化為極致的浪漫。書籍是靈魂的翅膀，花卉是生命的呼吸，而畫布承載著心跳般的筆觸——三者交融成我的調色盤，讓每個日常都如未乾的油彩般鮮活，既溫柔療癒自己，也將這份絢爛傳遞給世界。
+        </p>
+      </div>
+      <div class="image-box">
+        <img src="img/未命名的作品 13.png" alt="作品圖片" />
+      </div>
+    </div>
+  </div>
+
+  <!-- 區塊 3：聯絡資訊 -->
+  <div class="section section-3">
+    <div class="content-wrapper">
+      <div class="text-box">
+        <h2>Contacts</h2>
+      </div>
+      <div class="cards-wrapper">
+        <a href="Personal_Introduction.html" class="card" target="_blank" rel="noopener noreferrer">
+          <div class="card-title">Personal Introduction</div>
+          <div class="card-title">自我介紹</div>
+          <div class="card-divider"></div>
+          <div class="card-content">
+            Skilled in connecting with others, I explore design as a way to understand the world and myself. I aim to keep learning and expanding into a more diverse world. To me, the world is bold, design is dynamic, and both reflect my unique perspective.
+          </div>
+        </a>
+        <a href="skills.html" class="card" target="_blank" rel="noopener noreferrer">
+          <div class="card-title">Skills</div>
+          <div class="card-title">技能</div>
+          <div class="card-divider"></div>
+          <div class="card-content">
+            I've gained key skills in information management, including Python for data analysis, C++ for object-oriented programming, HTML/CSS for web design, and Unity/C# for game basics. These skills lay a strong foundation for my future studies and career.
+          </div>
+        </a>
+        <a href="profile.html" class="card" target="_blank" rel="noopener noreferrer">
+          <div class="card-title">Project Showcase</div>
+          <div class="card-title">作品集</div>
+          <div class="card-divider"></div>
+          <div class="card-content">
+            Project Showcase features a variety of creative works, including hand-drawn sketches, digital illustrations, 3D modeling, and photography, blending traditional and modern techniques to bring concepts to life with unique style.
+          </div>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- JS 放最後 -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      const imageBoxes = document.querySelectorAll('.image-box');
+
+      imageBoxes.forEach(box => {
+        box.addEventListener('click', function (e) {
+          // 關閉其他圖片
+          imageBoxes.forEach(b => {
+            if (b !== box) b.classList.remove('expanded');
+          });
+          // 切換展開狀態
+          box.classList.toggle('expanded');
+        });
+      });
+
+      // 點擊其他區域時收起圖片
+      document.addEventListener('click', function (e) {
+        if (!e.target.closest('.image-box')) {
+          imageBoxes.forEach(box => box.classList.remove('expanded'));
+        }
+      });
+    });
+  </script>
+</body>
+</html>

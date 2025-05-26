@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile</title>
+    <style>
+        html, body {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            min-height: 100%;
+            overflow-x: hidden;
+        }
+        body {
+            background-image: url(img/Picturer.png);
+            background-size: cover;
+            background-position:0px -800px;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            padding: 40px 0;
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 2em;
+        }
+        .header h1 {
+            font-size: 80px;
+            margin: 10px 0;
+            color: #808080;
+        }
+        .header h2 {
+            font-size: 25px;
+            margin: 10px 0;
+            color: #c7c3be;
+        }
+        .nav {
+            position: fixed;
+            bottom: 20px;
+            display: flex;
+            gap: 20px;
+        }
+        .nav a {
+            color: #c7c3be;
+            text-decoration: none;
+            font-size: 18px;
+            padding: 10px 20px;
+            border: 1px solid #c7c3be;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+        }
+        .nav a:hover {
+            background-color: #c7c3be;
+            color: #fff;
+        }
+        .section-2 {
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: center;
+            gap: 40px;
+            width: 80%;
+            margin: 0 auto;
+            padding-bottom: 40px;
+        }
+        .section {
+            width: 100%;
+            max-width: 800px;
+            background-color: rgba(0, 0, 0, 0.5);
+            padding: 30px;
+            border-radius: 20px;
+        }
+        .section h3 {
+            font-size: 35px;
+            margin-bottom: 20px;
+            color: #c7c3be;
+            text-align: center;
+        }
+        .section-content {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-top: 20px;
+        }
+        .section-item {
+            flex: 1;
+            margin-bottom: 15px;
+            padding: 10px;
+            border-left: 3px solid #c7c3be;
+            text-align: center;
+        }
+        .section-item h4 {
+            font-size: 20px;
+            margin-bottom: 10px;
+            color: #c7c3be;
+            cursor: pointer;
+            transition: color 0.3s ease;
+        }
+        .section-item h4:hover {
+            color: #FFFFFF;
+        }
+        .section-item p {
+            font-size: 16px;
+            color: #808080;
+            transition: color 0.3s ease;
+            cursor: pointer;
+            text-decoration: none;
+            display: block;
+            margin: 5px 0;
+        }
+        .section-item p:hover {
+            color: #FFFFFF;
+        }
+        .section-item a {
+            text-decoration: none;
+        }
+        .home-button {
+            position: relative;
+            bottom: 40px;
+            right: -580px;
+            padding: 10px 20px;
+            background-color: rgba(0, 0, 0, 0.5);
+            color: #ffffff;
+            text-decoration: none;
+            border-radius: 25px;
+            font-size: 16px;
+            transition: background-color 0.3s ease;
+            border: 1px solid #ffffff;
+            z-index: 1000;
+            cursor: pointer;
+        }
+        .home-button:hover {
+            background-color: rgba(0, 0, 0, 0.8);
+        }
+        @media (max-width: 768px) {
+            .section-content {
+                flex-direction: column;
+            }
+            .home-button {
+                bottom: 40px;
+                right: 40px;
+                padding: 8px 16px;
+                font-size: 14px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>Profile</h1>
+    </div>
+
+    <div class="section-2">
+        <div class="section">
+            <h3>手繪</h3>
+            <div class="section-content">
+                <div class="section-item">
+                    <a href="sketch_still_life.html"><h4>素描</h4></a>
+                </div>
+                <div class="section-item">
+                    <a href="watercolor_landscape.html"><h4>水彩</h4></a>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3>電腦</h3>
+            <div class="section-content">
+                <div class="section-item">
+                    <a href="digital_character.html"><h4>電腦繪圖</h4></a>
+                </div>
+                <div class="section-item">
+                    <a href="3d_product.html"><h4>3D建模</h4></a>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3>攝影</h3>
+            <div class="section-content">
+                <div class="section-item">
+                    <a href="photo_daily.html"><h4>風景攝影</h4></a>
+                </div>
+                
+            </div>
+        </div>
+
+        <div class="section">
+            <h3>專案</h3>
+            <div class="section-content">
+                <div class="section-item">
+                    <a href="project_website.html"><h4>設計專案</h4></a>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+
+    <a href="home.html" class="home-button">Back to Home</a>
+</body>
+</html> 

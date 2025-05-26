@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>素描/非常可以的排版</title>
+  <style>
+    :root {
+      --edge: 5px;
+      --gap: 20px;
+      --photo-base: min(30vw, 300px);
+      --radius: 20px;
+      --title-gap: 30px;
+    }
+    body {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 20px;
+      font-family: 'Noto Sans TC', sans-serif;
+      background: #fff;
+      position: relative;
+      z-index: 0;
+    }
+    /* 背景遮罩移到body最外層，z-index設0 */
+    .bg-overlay {
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: url('img/Portfolio/靜物素描/IMG_3765 2.png') no-repeat center center fixed;
+      background-size: cover;
+      opacity: 0.2;
+      z-index: 0;
+    }
+    /* gallery層級調高，避免被背景遮罩蓋 */
+    .gallery {
+      column-count: 3;
+      column-gap: var(--gap);
+      position: relative;
+      z-index: 1;
+    }
+    .photo {
+      width: 100%;
+      margin-bottom: var(--gap);
+      break-inside: avoid;
+      display: inline-block; /* 修正瀑布流間距問題 */
+    }
+    .image-hover-container {
+      position: relative;
+      width: 100%;
+      border-radius: var(--radius);
+      overflow: hidden;
+    }
+    .hover-image {
+      width: 100%;
+      height: auto;
+      display: block;
+      transition: filter 0.3s ease;
+      border-radius: var(--radius);
+    }
+    .hover-overlay {
+      position: absolute;
+      top: 0; left: 0; width: 100%; height: 100%;
+      background-color: rgba(0, 0, 0, 0.5);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: #fff;
+      font-size: 16px;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      text-align: center;
+      box-sizing: border-box;
+      border-radius: var(--radius);
+    }
+    .image-hover-container:hover .hover-overlay {
+      opacity: 1;
+    }
+    .image-hover-container:hover .hover-image {
+      filter: brightness(70%);
+    }
+    h1 {
+      text-align: center;
+      margin: 20px 0 10px;
+      font-size: 50px;
+      color: #8c8c8c;
+      font-weight: 500;
+      position: relative;
+      z-index: 1;
+    }
+    h2 {
+      text-align: center;
+      margin: 10px 0 30px;
+      font-size: 25px;
+      color: #8c8c8c;
+      font-weight: 500;
+      position: relative;
+      z-index: 1;
+    }
+
+    .divider {
+      width: 385px;
+      border: none;
+      border-top: 5px solid #bfbfbf;
+      margin: 10px auto 20px;
+      position: relative;
+      z-index: 1;
+      margin-left: 0;
+      padding-left: 0;
+      text-align: left;
+      margin-bottom: 10px;
+    }
+
+    h1, h2 {
+      margin-left: 0;
+      padding-left: 0;
+      text-align: left;
+      max-width: var(--photo-base); /* 或你照片寬度最大值 */
+      margin-bottom: 10px;
+    }
+    .overlay {
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(0, 0, 0, 0.9);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 9999;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease;
+    }
+    .overlay.active {
+      opacity: 1;
+      pointer-events: auto;
+    }
+    .enlarged {
+      max-width: 90vw;
+      max-height: 90vh;
+      padding: 0;
+      background: transparent;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+      border-radius: var(--radius);
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+    }
+    .enlarged img {
+      max-width: 90vw;
+      max-height: 90vh;
+      width: auto;
+      height: auto;
+      object-fit: contain;
+      display: block;
+      border-radius: var(--radius);
+    }
+    .prev-button, .next-button {
+      position: fixed;
+      top: 50%;
+      transform: translateY(-50%);
+      background-color: rgba(78, 78, 78, 0.5);
+      color: rgb(206, 206, 206);
+      border: none;
+      padding: 10px;
+      font-size: 24px;
+      cursor: pointer;
+      z-index: 1001;
+      border-radius: var(--radius);
+      opacity: 0.5; /* 0 = 完全透明, 1 = 完全不透明 */
+    }
+    .prev-button {
+      left: 15px;
+    }
+    .next-button {
+      right: 15px;
+    }
+    .home-button {
+      position: relative;
+      bottom: 20px;
+      right: -8px;
+      padding: 10px 20px;
+      background-color: rgba(0, 0, 0, 0.5);
+      color: #ffffff;
+      text-decoration: none;
+      border-radius: 25px;
+      font-size: 16px;
+      transition: background-color 0.3s ease;
+      border: 1px solid #ffffff;
+      z-index: 1000;
+      cursor: pointer;
+    }
+    .home-button:hover {
+      background-color: rgba(0, 0, 0, 0.8);
+    }
+    @media (max-width: 768px) {
+      .gallery {
+        column-count: 2;
+      }
+    }
+    @media (max-width: 480px) {
+      .gallery {
+        column-count: 1;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="bg-overlay"></div>
+
+  <div class="gallery">
+    <h1>素描</h1>
+    <hr class="divider" />
+    <h2>Sketch</h2>
+    <div class="photo"><div class="image-hover-container"><img src="img/Portfolio/靜物素描/靜物素描01.png" alt="靜物素描01" class="hover-image"/><div class="hover-overlay"><p>質感練習<br>2024</p></div></div></div>
+    <div class="photo"><div class="image-hover-container"><img src="img/Portfolio/靜物素描/靜物素描02.png" alt="靜物素描02" class="hover-image"/><div class="hover-overlay"><p>質感練習<br>2024</p></div></div></div>
+    <div class="photo"><div class="image-hover-container"><img src="img/Portfolio/靜物素描/靜物素描03.png" alt="靜物素描03" class="hover-image"/><div class="hover-overlay"><p>質感練習<br>2024</p></div></div></div>
+    <div class="photo"><div class="image-hover-container"><img src="img/Portfolio/靜物素描/靜物素描04拷貝.png" alt="靜物素描04" class="hover-image"/><div class="hover-overlay"><p>質感練習<br>2024</p></div></div></div>
+    <div class="photo"><div class="image-hover-container"><img src="img/Portfolio/靜物素描/靜物素描05.png" alt="靜物素描05" class="hover-image"/><div class="hover-overlay"><p>三點透視<br>2024</p></div></div></div>
+    <div class="photo"><div class="image-hover-container"><img src="img/Portfolio/靜物素描/靜物素描07.png" alt="靜物素描07" class="hover-image"/><div class="hover-overlay"><p>望劫<br>2022</p></div></div></div>
+    <div class="photo"><div class="image-hover-container"><img src="img/Portfolio/靜物素描/靜物素描08.png" alt="靜物素描08" class="hover-image"/><div class="hover-overlay"><p>炭筆靜物素描<br>2023</p></div></div></div>
+    <div class="photo"><div class="image-hover-container"><img src="img/Portfolio/靜物素描/靜物素描09.png" alt="靜物素描09" class="hover-image"/><div class="hover-overlay"><p>炭筆靜物素描<br>2023</p></div></div></div>
+    <div class="photo"><div class="image-hover-container"><img src="img/Portfolio/靜物素描/產品01.jpg" alt="產品01" class="hover-image"/><div class="hover-overlay"><p>產品精摩<br>2023</p></div></div></div>
+    <div class="photo"><div class="image-hover-container"><img src="img/Portfolio/靜物素描/產品02.jpg" alt="產品02" class="hover-image"/><div class="hover-overlay"><p>產品素描<br>2023</p></div></div></div>
+    <div class="photo"><div class="image-hover-container"><img src="img/Portfolio/靜物素描/產品03.jpg" alt="產品03" class="hover-image"/><div class="hover-overlay"><p>產品素描<br>2023</p></div></div></div>
+    <div class="photo"><div class="image-hover-container"><img src="img/Portfolio/靜物素描/產品04.jpg" alt="產品04" class="hover-image"/><div class="hover-overlay"><p>產品素描<br>2023</p></div></div></div>
+    <div class="photo"><div class="image-hover-container"><img src="img/Portfolio/靜物素描/產品05.jpg" alt="產品05" class="hover-image"/><div class="hover-overlay"><p>產品素描<br>2023</p></div></div></div>
+    <div class="photo"><div class="image-hover-container"><img src="img/Portfolio/靜物素描/靜物素描06.png" alt="靜物素描06" class="hover-image"/><div class="hover-overlay"><p>質感練習<br>2024</p></div></div></div>
+  </div>
+
+  <a href="profile.html" class="home-button">Back to Profile</a>
+
+  <!-- 放大彈出層 -->
+  <div class="overlay" id="imageOverlay" tabindex="-1" aria-hidden="true">
+    <button class="prev-button" id="prevBtn" aria-label="上一張圖片">&#10094;</button>
+    <div class="enlarged" role="dialog" aria-modal="true" aria-label="圖片放大視窗">
+      <img id="enlargedImage" src="" alt="放大圖片" />
+    </div>
+    <button class="next-button" id="nextBtn" aria-label="下一張圖片">&#10095;</button>
+  </div>
+
+  <script>
+    window.addEventListener('DOMContentLoaded', () => {
+      const photoElements = Array.from(document.querySelectorAll('.photo'));
+      const overlay = document.getElementById('imageOverlay');
+      const enlargedImage = document.getElementById('enlargedImage');
+      const prevBtn = document.getElementById('prevBtn');
+      const nextBtn = document.getElementById('nextBtn');
+  
+      let images = [];
+      let currentIndex = -1;
+      let idleTimer = null;
+  
+      // 建立圖片陣列
+      photoElements.forEach(photo => {
+        const img = photo.querySelector('img');
+        if (img) images.push(img);
+      });
+  
+      function showImage(index) {
+        if (images.length === 0) return;
+        if (index < 0) index = images.length - 1;
+        if (index >= images.length) index = 0;
+        currentIndex = index;
+  
+        const img = images[currentIndex];
+        if (!img) return;
+  
+        enlargedImage.src = img.src;
+        enlargedImage.alt = img.alt;
+        overlay.classList.add('active');
+        overlay.setAttribute('aria-hidden', 'false');
+        enlargedImage.focus();
+  
+        resetIdleTimer(); // 設定自動關閉倒數
+      }
+  
+      function hideOverlay() {
+        overlay.classList.remove('active');
+        overlay.setAttribute('aria-hidden', 'true');
+        enlargedImage.src = '';
+        currentIndex = -1;
+        clearTimeout(idleTimer);
+      }
+  
+      function resetIdleTimer() {
+        clearTimeout(idleTimer);
+        idleTimer = setTimeout(() => {
+          hideOverlay();
+        }, 5000); // 5 秒後自動關閉
+      }
+  
+      // 點擊圖片放大
+      photoElements.forEach((photo, index) => {
+        photo.addEventListener('click', () => {
+          showImage(index);
+        });
+      });
+  
+      // 上一張 / 下一張按鈕
+      prevBtn.addEventListener('click', () => {
+        if (currentIndex !== -1) showImage(currentIndex - 1);
+      });
+  
+      nextBtn.addEventListener('click', () => {
+        if (currentIndex !== -1) showImage(currentIndex + 1);
+      });
+  
+      // 點擊空白區域關閉
+      overlay.addEventListener('click', (e) => {
+        if (e.target === overlay) {
+          hideOverlay();
+        }
+      });
+  
+      // 鍵盤控制 + 重設倒數
+      document.addEventListener('keydown', (e) => {
+        if (overlay.classList.contains('active')) {
+          resetIdleTimer();
+          if (e.key === 'ArrowLeft') {
+            e.preventDefault();
+            showImage(currentIndex - 1);
+          } else if (e.key === 'ArrowRight') {
+            e.preventDefault();
+            showImage(currentIndex + 1);
+          } else if (e.key === 'Escape') {
+            hideOverlay();
+          }
+        }
+      });
+  
+      // 滑鼠移動時也會重設倒數
+      overlay.addEventListener('mousemove', () => {
+        if (overlay.classList.contains('active')) {
+          resetIdleTimer();
+        }
+      });
+    });
+  </script>
+  
+
+</body>
+</html>
