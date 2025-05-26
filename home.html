@@ -172,68 +172,94 @@
     }
 
     @media (max-width: 768px) {
-      .content-wrapper {
-        flex-direction: column;
-        align-items: center;
-        padding-left: 0;
-        padding-right: 0;
-      }
+  /* 手機版背景圖與電腦一致，置中不跑版 */
+  html, body {
+    background-position: center;
+    background-size: cover;
+    background-attachment: fixed;
+  }
 
-      .image-box {
-        width: 100%;
-        max-width: 300px;
-        height: 300px;
-        overflow: hidden;
-        border-radius: 20px;
-      }
+  /* 全區塊文字統一置中 */
+  .text-box,
+  .section h2,
+  .section-1 h1,
+  .card-title,
+  .card-content,
+  .section-3 h2,
+  .text-box p {
+    text-align: center;
+  }
 
-      .text-box {
-        border-radius: 20px;
-        text-align: center;
-        margin-right: 0;
-        max-width: 100%;
-      }
+  .content-wrapper {
+    flex-direction: column;
+    align-items: center;
+    padding-left: 0;
+    padding-right: 0;
+  }
 
-      .section-1 h1 {
-        font-size: 60px; /* 原本是 120px，可適當調小 */
-      }
+  .image-box {
+    width: 100%;
+    max-width: 300px;
+    height: 300px;
+    overflow: hidden;
+    border-radius: 20px;
+  }
 
-      .text-box h2 {
-        font-size: 36px;
-      }
+  .text-box {
+    border-radius: 20px;
+    margin-right: 0;
+    max-width: 100%;
+  }
 
-      .card-title {
-        font-size: 24px;
-      }
+  /* 手機字體大小調整 */
+  .section-1 h1 {
+    font-size: 48px; /* 原本是 60px，再小一點 */
+  }
 
-      .card-content {
-        font-size: 16px;
-      }
-      .cards-wrapper {
-        flex-direction: column;
-        max-width: 100%;
-      }
+  .section h2 {
+    font-size: 32px;
+  }
 
-      .card {
-        max-width: 100%;
-        margin-bottom: 20px;
-      }
+  .text-box h2 {
+    font-size: 28px;
+  }
 
-      .section-3 .content-wrapper {
-        padding-left: 0;
-        padding-right: 0;
-        align-items: center;
-      }
+  .text-box p {
+    font-size: 16px;
+    line-height: 1.6;
+    letter-spacing: 0.1em;
+  }
 
-      .section-3 .text-box {
-        max-width: 100%;
-        text-align: center;
-      }
+  .card-title {
+    font-size: 22px;
+  }
 
-      .section-3 h2 {
-        text-align: center;
-      }
-    }
+  .card-content {
+    font-size: 15px;
+  }
+
+  .cards-wrapper {
+    flex-direction: column;
+    max-width: 100%;
+  }
+
+  .card {
+    max-width: 100%;
+    margin-bottom: 20px;
+    align-items: center;
+  }
+
+  .section-3 .content-wrapper {
+    padding-left: 0;
+    padding-right: 0;
+    align-items: center;
+  }
+
+  .section-3 .text-box {
+    max-width: 100%;
+  }
+}
+
 
     /* 半透明遮罩加在每個 .section 上 */
   .section {
@@ -257,9 +283,74 @@
     z-index: 1;
   }
 
+  /* 漢堡選單樣式：只在手機顯示 */
+.mobile-nav {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .mobile-nav {
+    position: fixed;
+    top: 15px;
+    right: 15px;
+    z-index: 100;
+    display: block;
+  }
+
+  .menu-icon {
+    font-size: 28px;
+    background-color: rgba(0, 0, 0, 0.6);
+    color: #fff;
+    padding: 10px 15px;
+    border-radius: 10px;
+    cursor: pointer;
+    user-select: none;
+  }
+
+  .menu-list {
+    display: none;
+    flex-direction: column;
+    position: absolute;
+    top: 50px;
+    right: 0;
+    background-color: rgba(30, 30, 30, 0.95);
+    border-radius: 10px;
+    padding: 10px;
+    list-style: none;
+  }
+
+  .menu-list li {
+    margin: 8px 0;
+  }
+
+  .menu-list a {
+    color: #fff;
+    text-decoration: none;
+    font-size: 18px;
+    padding: 6px 12px;
+    display: block;
+    text-align: right;
+  }
+
+  .menu-list.show {
+    display: flex;
+  }
+}
+
+
   </style>
 </head>
 <body>
+
+  <nav class="mobile-nav">
+  <div class="menu-icon" onclick="toggleMenu()">☰</div>
+  <ul class="menu-list">
+    <li><a href="Personal_Introduction.html" target="_blank">自我介紹</a></li>
+    <li><a href="skills.html" target="_blank">技能</a></li>
+    <li><a href="profile.html" target="_blank">作品集</a></li>
+  </ul>
+</nav>
+
 
   <!-- 區塊 1 -->
   <div class="section section-1">
@@ -340,6 +431,19 @@
           imageBoxes.forEach(box => box.classList.remove('expanded'));
         }
       });
+    });
+
+    function toggleMenu() {
+  const menuList = document.querySelector('.menu-list');
+  menuList.classList.toggle('show');
+}
+
+    // 點擊其他區域時收起漢堡選單
+    document.addEventListener('click', function (e) {
+      const menuList = document.querySelector('.menu-list');
+      if (!e.target.closest('.menu-icon') && !e.target.closest('.menu-list')) {
+        menuList.classList.remove('show');
+      }
     });
   </script>
 </body>
