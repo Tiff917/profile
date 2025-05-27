@@ -6,233 +6,279 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
   <title>home</title>
   <style>
+  /* 基礎樣式 */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 
+html, body {
+  height: 100%;
+  min-height: 100vh;
+  background-image: url('img/IMG_5046 2.png');
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
+  background-attachment: fixed;
+  font-family: Arial, sans-serif;
+  color: #c7c3be;
+}
 
+/* 區塊通用樣式 */
+.section {
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 40px;
+  position: relative;
+  overflow: hidden;
+}
 
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+.section::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(78, 77, 77, 0.4);
+  z-index: 0;
+}
 
-    html, body {
-      height: 100%;
-      min-height: 100vh;
-      background-image: url('img/IMG_5046 2.png');
-      background-repeat: no-repeat;
-      background-position: center center;
-      background-size: cover;
-      background-attachment: fixed;
-      font-family: Arial, sans-serif;
-      color: #c7c3be;
-    }
+.section > * {
+  position: relative;
+  z-index: 1;
+}
 
-    .footer {
-      width: 100%;
-      padding: 30px 20px;
-      text-align: center;
-      position: relative;
-      z-index: 2;
-      color: #c7c3be99;
+/* 區塊1特定樣式 */
+.section-1 h1 {
+  font-size: 120px;
+  margin: 20px 0;
+}
 
-      font-weight: 300;
-      font-size: 18px;
-      overflow: hidden;
-    }
+/* 區塊2特定樣式 */
+.section-2 .content-wrapper {
+  max-width: 1200px;
+  margin: 0 auto;
+  width: 100%;
+  display: flex;
+  gap: 40px;
+  flex-wrap: wrap;
+}
 
-    .footer::before {
-    content: "";
-    position: absolute;
-    top: 0; left: 0; right: 0; bottom: 0;
-    background-color: rgba(0, 0, 0, 0.6); /* 深一點的半透明黑色 */
-    z-index: -1; /* 放在文字後面 */
-    border-radius: 0; /* 如果需要圓角可以加 */
-  }
+.text-box {
+  flex: 1;
+  min-width: 200px;
+  max-width: 500px;
+  margin-right: 30px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
 
-  .footer-content {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 150px;
-  }
+.text-box h2 {
+  font-size: 65px;
+  margin-bottom: 20px;
+  color: #c7c3be;
+}
 
-  .footer-content a {
-    white-space: nowrap;
-    transition: opacity 0.3s ease;
-    color: #c7c3be;             
-    text-decoration: none;     /* 取消底線 */
-  }
+.text-box p {
+  font-size: 20px;
+  line-height: 1.6;
+  letter-spacing: 0.15em;
+  color: #e0ddd7;
+}
 
-  .footer-content a:hover {
-    opacity: 0.7;
-    color: #ddd;          
-  }
+.image-box {
+  flex: 0 0 600px;
+  height: 120%;
+  overflow: hidden;
+  border-radius: 50px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+  position: relative;
+  cursor: pointer;
+  transition: transform 0.4s ease;
+  z-index: 1;
+}
 
+.image-box img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: contain;
+}
+
+.image-box.expanded {
+  transform: scale(1.25);
+  z-index: 10;
+}
+
+/* 區塊3特定樣式 */
+.section-3 {
+  align-items: flex-start;
+  padding-top: 60px;
+}
+
+.section-3 .content-wrapper {
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 30px;
+  padding-right: 30px;
+}
+
+.section-3 .text-box {
+  margin-right: 0;
+  max-width: 500px;
+  text-align: left;
+}
+
+.cards-wrapper {
+  width: 100%;
+  display: flex;
+  gap: 60px;
+  justify-content: flex-start;
+  flex-wrap: nowrap;
+}
+
+.card {
+  background-color: rgba(0, 0, 0, 0.5);
+  padding: 30px;
+  border-radius: 25px;
+  flex: 1 1 0;
+  min-width: 0;
+  max-width: 33.33%;
+  color: #c7c3be;
+  text-decoration: none;
+  box-shadow: 0 3px 8px rgba(0,0,0,0.3);
+  transition: background-color 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  cursor: pointer;
+}
+
+.card:hover {
+  background-color: rgba(0, 0, 0, 0.8);
+}
+
+.card-title {
+  font-size: 35px;
+  margin-bottom: 12px;
+  padding-bottom: 6px;
+}
+
+.card-divider {
+  height: 3px;
+  width: 50px;
+  background-color: #c7c3be;
+  margin-bottom: 20px;
+  border-radius: 2px;
+}
+
+.card-content {
+  font-size: 18px;
+  line-height: 1.5;
+  text-align: justify;
+  flex-grow: 1;
+}
+
+/* 頁腳樣式 */
+.footer {
+  width: 100%;
+  padding: 30px 20px;
+  text-align: center;
+  position: relative;
+  z-index: 2;
+  color: #c7c3be99;
+  font-weight: 300;
+  font-size: 18px;
+  overflow: hidden;
+}
+
+.footer::before {
+  content: "";
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background-color: rgba(0, 0, 0, 0.6);
+  z-index: -1;
+}
+
+.footer-content {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 150px;
+}
+
+.footer-content a {
+  white-space: nowrap;
+  transition: opacity 0.3s ease;
+  color: #c7c3be;
+  text-decoration: none;
+}
+
+.footer-content a:hover {
+  opacity: 0.7;
+  color: #ddd;
+}
 
 .footer i {
   font-size: 18px;
   gap: 10px;
 }
 
-    .section {
-      width: 100%;
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      padding: 40px;
-      color: #c7c3be;
-      position: relative;
-      overflow: hidden;
-    }
+/* 移動導航樣式 */
+.mobile-nav {
+  display: none;
+}
 
-    .section-1 h1 {
-      font-size: 120px;
-      margin: 20px 0;
-    }
+.menu-icon {
+  font-size: 30px;
+  background-color: rgba(0, 0, 0, 0.6);
+  color: #fff;
+  padding: 10px 15px;
+  border-radius: 18px;
+  cursor: pointer;
+  user-select: none;
+}
 
-    .section h2 {
-      font-size: 60px;
-      margin: 10px 0;
-      color: #c7c3be;
-    }
+.menu-list {
+  display: none;
+  flex-direction: column;
+  position: absolute;
+  top: 50px;
+  right: 0;
+  background-color: rgba(30, 30, 30, 0.95);
+  border-radius: 10px;
+  padding: 10px;
+  list-style: none;
+  gap: 10px;
+  white-space: nowrap;
+}
 
-    .content-wrapper {
-      max-width: 1200px;
-      margin: 0 auto;
-      width: 100%;
-      display: flex;
-      gap: 40px;
-      flex-wrap: wrap;
-    }
+.menu-list li {
+  margin: 8px 0;
+}
 
-    .text-box {
-      flex: 1;
-      min-width: 200px;
-      max-width: 500px;
-      margin-right: 30px;
-      display: flex;
-      flex-direction: column;
-      justify-content: flex-end;
-    }
+.menu-list a {
+  color: #fff;
+  text-decoration: none;
+  font-size: 12px;
+  padding: 6px 12px;
+  display: block;
+  text-align: right;
+}
 
-    .text-box h2 {
-      font-size: 65px;
-      margin-bottom: 20px;
-    }
+.menu-list.show {
+  display: flex;
+}
 
-    .text-box p {
-      font-size: 20px;
-      line-height: 1.6;
-      letter-spacing: 0.15em;
-      color: #e0ddd7;
-    }
-
-    .image-box {
-      flex: 0 0 600px;
-      height: 120%;
-      overflow: hidden;
-      border-radius: 50px;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.3);
-      position: relative;
-      cursor: pointer;
-      transition: transform 0.4s ease;
-      z-index: 1;
-      
-    }
-
-    .image-box img {
-      width: 100%;
-      height: 100%;
-      display: block;
-      object-fit: contain;
-    }
-
-    /* 點擊放大效果 */
-    .image-box.expanded {
-      transform: scale(1.25);
-      z-index: 10;
-    }
-
-    .section-3 {
-      align-items: flex-start;
-      padding-top: 60px;
-      width: 100%;
-    }
-
-    .section-3 .content-wrapper {
-      flex-direction: column;
-      align-items: flex-start;
-      gap: 30px;
-      padding-right: 30px;
-    }
-
-    .section-3 .text-box {
-      margin-right: 0;
-      max-width: 500px;
-      text-align: left;
-    }
-
-    .cards-wrapper {
-      width: 100%;
-      display: flex;
-      gap: 60px;
-      justify-content: flex-start;
-      flex-wrap: nowrap;
-    }
-
-    .card {
-      background-color: rgba(0, 0, 0, 0.5);
-      padding: 30px;
-      border-radius: 25px;
-      flex: 1 1 0;
-      min-width: 0;
-      max-width: 33.33%;
-      color: #c7c3be;
-      text-decoration: none;
-      box-shadow: 0 3px 8px rgba(0,0,0,0.3);
-      transition: background-color 0.3s ease;
-      display: flex;
-      flex-direction: column;
-      cursor: pointer;
-    }
-
-    .card:hover {
-      background-color: rgba(0, 0, 0, 0.8);
-    }
-
-    .card-title {
-      font-size: 35px;
-      margin-bottom: 12px;
-      padding-bottom: 6px;
-    }
-
-    .card-divider {
-      height: 3px;
-      width: 50px;
-      background-color: #c7c3be;
-      margin-bottom: 20px;
-      border-radius: 2px;
-    }
-
-    .card-content {
-      font-size: 18px;
-      line-height: 1.5;
-      text-align: justify;
-      flex-grow: 1;
-    }
-
-    @media (max-width: 430px) {
-  /* 手機版背景圖與電腦一致，置中不跑版 */
-  html, body {
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: center;
-    background-attachment: fixed;
-  }
-
-  /* 全區塊文字統一置中 */
+/* 響應式設計 - 手機 (≤768px) */
+@media (max-width: 768px) {
+  /* 文字調整 */
   .text-box,
   .section h2,
   .section-1 h1,
@@ -243,46 +289,8 @@
     text-align: center;
   }
 
-  .content-wrapper {
-    flex-direction: column;
-    align-items: center;
-    padding-left: 0;
-    padding-right: 0;
-  }
-
-  .image-box {
-  width: 90%;
-  height: auto;
-  max-width: 300px;
-  max-height: 300px;
-
-  aspect-ratio: 1 / 1;
-  border-radius: 15px;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
-  margin: 20px auto;
-  overflow: hidden;
-  transition: all 0.3s ease-in-out;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.image-box img {
-  width: 100%;
-  height: 100%;
-  display: block;
-  object-fit: cover;
-}
-
-  .text-box {
-    border-radius: 20px;
-    margin-right: 0;
-    max-width: 100%;
-  }
-
-  /* 手機字體大小調整 */
   .section-1 h1 {
-    font-size: 60px; /* 原本是 60px，再小一點 */
+    font-size: 60px;
   }
 
   .section h2 {
@@ -295,7 +303,6 @@
 
   .text-box p {
     font-size: 16px;
-    line-height: 1.6;
     letter-spacing: 0.1em;
   }
 
@@ -305,6 +312,33 @@
 
   .card-content {
     font-size: 15px;
+  }
+
+  /* 佈局調整 */
+  .content-wrapper {
+    flex-direction: column;
+    align-items: center;
+    padding: 0;
+    gap: 15px;
+  }
+
+  .image-box {
+    width: 90%;
+    height: auto;
+    max-width: 300px;
+    max-height: 300px;
+    aspect-ratio: 1 / 1;
+    border-radius: 15px;
+    margin: 20px auto;
+  }
+
+  .section-3 .content-wrapper {
+    padding: 0;
+    align-items: center;
+  }
+
+  .section-3 .text-box {
+    max-width: 100%;
   }
 
   .cards-wrapper {
@@ -318,131 +352,43 @@
     align-items: center;
   }
 
-  .section-3 .content-wrapper {
-    padding-left: 0;
-    padding-right: 0;
+  /* 頁腳調整 */
+  .footer {
+    padding: 10px 0;
+  }
+
+  .footer-content {
+    flex-direction: row;   /* 橫向排列 */
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: nowrap;    /* 不換行 */
+  }
+
+  .footer-content a {
+    font-size: 14px;
+    gap: 6px;
+    display: flex;
     align-items: center;
   }
 
-  .section-3 .text-box {
-    max-width: 100%;
-  }
-  .content-wrapper {
-    gap: 15px;
-  }
-}
-
-
-
-    /* 半透明遮罩加在每個 .section 上 */
-  .section {
-    position: relative;
-    overflow: hidden;
+  .footer-content svg {
+    width: 16px;
+    height: 16px;
   }
 
-  .section::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(78, 77, 77, 0.4); /* 半透明黑 */
-    z-index: 0;
-  }
-
-  .section > * {
-    position: relative;
-    z-index: 1;
-  }
-
-  /* 漢堡選單樣式：只在手機顯示 */
-.mobile-nav {
-  display: none;
-}
-
-@media (max-width: 430px) {
+  /* 導航顯示 */
   .mobile-nav {
+    display: block;
     position: fixed;
     top: 15px;
     right: 15px;
     z-index: 100;
-    display: block;
   }
-
-  .menu-icon {
-    font-size: 30px;
-    background-color: rgba(0, 0, 0, 0.6);
-    color: #fff;
-    padding: 10px 15px;
-    border-radius: 18px;
-    cursor: pointer;
-    user-select: none;
-  }
-
-  .menu-list {
-    display: none;
-    flex-direction: column;
-    position: absolute;
-    top: 50px;
-    right: 0;
-    background-color: rgba(30, 30, 30, 0.95);
-    border-radius: 10px;
-    padding: 10px;
-    list-style: none;
-    gap: 10px;
-    white-space: nowrap; /* 防止自動換行 */
-  }
-
-  .menu-list li {
-    margin: 8px 0;
-  }
-
-  .menu-list a {
-    color: #fff;
-    text-decoration: none;
-    font-size: 12px;
-    padding: 6px 12px;
-    display: block;
-    text-align: right;
-  }
-
-  .menu-list.show {
-    display: flex;
-  }
-  .content-wrapper {
-    gap: 20px;
-  }
-
-  .bg-image {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  object-fit: cover;
-  z-index: -1;
 }
 
-.footer-content a{
-  font-size: 12px;
-}
-.footer-content a svg{
-  font-size: 18px;
-}
-
-.footer{
-  flex-direction: column;
-    gap: 12px;
-    padding: 1rem 0.5rem;
-}
-}
-
-/* iPad 螢幕大小偵測：寬度介於 768px 至 1024px */
-@media (min-width: 430px) and (max-width: 1024px) {
-  /* 針對 iPad 調整樣式 */
-
-  /* 例如改變文字大小 */
+/* 響應式設計 - iPad (768px-1024px) */
+@media (min-width: 768px) and (max-width: 1024px) {
   .section-1 h1 {
     font-size: 80px;
   }
@@ -451,10 +397,8 @@
     font-size: 40px;
   }
 
-  /* 改變圖片大小和外觀 */
   .image-box {
     width: 85%;
-    height: auto;
     max-width: 450px;
     max-height: 450px;
     border-radius: 30px;
@@ -462,26 +406,24 @@
   }
 
   .text-box p {
-  max-width: 450px;
-  /* 如果想強制固定寬度也可以用 width: 400px; */
-}
-.cards-wrapper {
-  max-width: 600px;
-  margin: 0 auto; /* 如果想讓它置中 */
+    max-width: 450px;
+  }
+
+  .cards-wrapper {
+    max-width: 600px;
+    margin: 0 auto;
+  }
+
+  .footer-content {
+    flex-direction: row;   /* 橫向排列 */
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: nowrap;    /* 不換行 */
+  }
 }
 
-.bg-image {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  object-fit: cover;      /* 滿版又不變形 */
-  z-index: -1;            /* 放在最底層 */
-  filter: brightness(80%) contrast(100%); /* 跟你原本效果一致 */
-}
-
-/* 桌面版本調整 */
+/* 響應式設計 - 桌面 (>1024px) */
 @media (min-width: 1025px) {
   .image-box {
     height: auto;
@@ -503,11 +445,6 @@
 
   .text-box {
     max-width: 600px;
-  }
-
-  .content-wrapper {
-    max-width: 1200px;
-    margin: 0 auto;
   }
 
   .section-1 h1 {
@@ -535,12 +472,7 @@
     font-size: 16px;
   }
 }
-
-
-}
-
-
-  </style>
+</style>
 </head>
 <body>
  
