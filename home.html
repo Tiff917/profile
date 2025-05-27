@@ -232,7 +232,11 @@ html, body {
 
 /* 移動導航樣式 */
 .mobile-nav {
-  display: none;
+  position: fixed;
+  top: 0;
+  right: 0;
+  z-index: 9999;
+  transition: transform 0.3s ease;
 }
 
 .menu-icon {
@@ -361,13 +365,13 @@ html, body {
     flex-direction: row;   /* 橫向排列 */
     align-items: center;
     justify-content: center;
-    gap: 20px;
+    gap: 25px;
     flex-wrap: nowrap;    /* 不換行 */
   }
 
   .footer-content a {
     font-size: 14px;
-    gap: 6px;
+    gap: 8px;
     display: flex;
     align-items: center;
   }
@@ -415,11 +419,17 @@ html, body {
   }
 
   .footer-content {
-    flex-direction: row;   /* 橫向排列 */
+    flex-direction: row;
     align-items: center;
     justify-content: center;
-    gap: 20px;
-    flex-wrap: nowrap;    /* 不換行 */
+    gap: 35px;           /* 減少間距 */
+    flex-wrap: wrap;     /* 允許換行 */
+  }
+
+  .footer-content a {
+    white-space: normal; /* 允許斷行 */
+    flex-shrink: 1;      /* 允許縮小 */
+    min-width: 0;        /* 防止寬度撐開 */
   }
 }
 
@@ -633,6 +643,33 @@ html, body {
       clearTimeout(menuTimeout); // 同時清除定時器
     }
   });
+
+  let lastScrollTop = 0;
+const mobileNav = document.querySelector('.mobile-nav');
+
+window.addEventListener('scroll', () => {
+  if(window.innerWidth > 800) {
+    // 大螢幕不處理滑動效果
+    mobileNav.style.display = 'block'; 
+    return;
+  }
+
+  let currentScrollTop = window.pageYOffset || document.documentElement.scrollTop;
+
+  if (currentScrollTop > lastScrollTop) {
+    // 往下滑，隱藏漢堡
+    mobileNav.style.transform = 'translateY(-150%)';
+    mobileNav.style.transition = 'transform 0.3s ease';
+  } else {
+    // 往上滑，顯示漢堡
+    mobileNav.style.transform = 'translateY(0)';
+    mobileNav.style.transition = 'transform 0.3s ease';
+  }
+
+  lastScrollTop = currentScrollTop <= 0 ? 0 : currentScrollTop; // 防止負值
+});
+
+
   </script>
 </body>
 </html>
