@@ -12,12 +12,18 @@
     }
 
     html, body {
-    height: 100%;
-    font-family: Arial, sans-serif;
-    color: #c7c3be;
-    background: none; /* 不需要背景圖 */
-    }
+  height: 100%;
+  min-height: 100vh;
+  background-image: url('img/IMG_5046 2.png');
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
+  background-attachment: fixed;
+  font-family: Arial, sans-serif;
+  color: #c7c3be;
+}
 
+  
     .section {
       width: 100%;
       min-height: 100vh;
@@ -170,7 +176,7 @@
     @media (max-width: 768px) {
   /* 手機版背景圖與電腦一致，置中不跑版 */
   html, body {
-    background-size: contain;
+    background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
     background-attachment: fixed;
@@ -474,7 +480,7 @@
   </style>
 </head>
 <body>
-  <img src="img/IMG_5046 2.png" class="bg-image" alt="背景圖">
+ 
   <nav class="mobile-nav">
   <div class="menu-icon" onclick="toggleMenu()">☰</div>
   <ul class="menu-list">
@@ -607,7 +613,3 @@
   </script>
 </body>
 </html>
-  .card-content {
-    font-size: 16px;
-  }
-}
