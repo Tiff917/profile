@@ -1,3 +1,417 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>home</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html, body {
+    height: 100%;
+    font-family: Arial, sans-serif;
+    color: #c7c3be;
+    background: none; /* 不需要背景圖 */
+    }
+
+    .section {
+      width: 100%;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 40px;
+      color: #c7c3be;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .section-1 h1 {
+      font-size: 120px;
+      margin: 20px 0;
+    }
+
+    .section h2 {
+      font-size: 60px;
+      margin: 10px 0;
+      color: #c7c3be;
+    }
+
+    .content-wrapper {
+      max-width: 1200px;
+      margin: 0 auto;
+      width: 100%;
+      display: flex;
+      gap: 40px;
+      flex-wrap: wrap;
+    }
+
+    .text-box {
+      flex: 1;
+      min-width: 200px;
+      max-width: 500px;
+      margin-right: 30px;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+    }
+
+    .text-box h2 {
+      font-size: 65px;
+      margin-bottom: 20px;
+    }
+
+    .text-box p {
+      font-size: 20px;
+      line-height: 1.6;
+      letter-spacing: 0.15em;
+      color: #e0ddd7;
+    }
+
+    .image-box {
+      flex: 0 0 600px;
+      height: 120%;
+      overflow: hidden;
+      border-radius: 50px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+      position: relative;
+      cursor: pointer;
+      transition: transform 0.4s ease;
+      z-index: 1;
+      
+    }
+
+    .image-box img {
+      width: 100%;
+      height: 100%;
+      display: block;
+      object-fit: contain;
+    }
+
+    /* 點擊放大效果 */
+    .image-box.expanded {
+      transform: scale(1.25);
+      z-index: 10;
+    }
+
+    .section-3 {
+      align-items: flex-start;
+      padding-top: 60px;
+      width: 100%;
+    }
+
+    .section-3 .content-wrapper {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 30px;
+      padding-right: 30px;
+    }
+
+    .section-3 .text-box {
+      margin-right: 0;
+      max-width: 500px;
+      text-align: left;
+    }
+
+    .cards-wrapper {
+      width: 100%;
+      display: flex;
+      gap: 60px;
+      justify-content: flex-start;
+      flex-wrap: nowrap;
+    }
+
+    .card {
+      background-color: rgba(0, 0, 0, 0.5);
+      padding: 30px;
+      border-radius: 25px;
+      flex: 1 1 0;
+      min-width: 0;
+      max-width: 33.33%;
+      color: #c7c3be;
+      text-decoration: none;
+      box-shadow: 0 3px 8px rgba(0,0,0,0.3);
+      transition: background-color 0.3s ease;
+      display: flex;
+      flex-direction: column;
+      cursor: pointer;
+    }
+
+    .card:hover {
+      background-color: rgba(0, 0, 0, 0.8);
+    }
+
+    .card-title {
+      font-size: 35px;
+      margin-bottom: 12px;
+      padding-bottom: 6px;
+    }
+
+    .card-divider {
+      height: 3px;
+      width: 50px;
+      background-color: #c7c3be;
+      margin-bottom: 20px;
+      border-radius: 2px;
+    }
+
+    .card-content {
+      font-size: 18px;
+      line-height: 1.5;
+      text-align: justify;
+      flex-grow: 1;
+    }
+
+    @media (max-width: 768px) {
+  /* 手機版背景圖與電腦一致，置中不跑版 */
+  html, body {
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-attachment: fixed;
+  }
+
+  /* 全區塊文字統一置中 */
+  .text-box,
+  .section h2,
+  .section-1 h1,
+  .card-title,
+  .card-content,
+  .section-3 h2,
+  .text-box p {
+    text-align: center;
+  }
+
+  .content-wrapper {
+    flex-direction: column;
+    align-items: center;
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+  .image-box {
+  width: 90%;
+  height: auto;
+  max-width: 300px;
+  max-height: 300px;
+
+  aspect-ratio: 1 / 1;
+  border-radius: 15px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+  margin: 20px auto;
+  overflow: hidden;
+  transition: all 0.3s ease-in-out;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.image-box img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+}
+
+  .text-box {
+    border-radius: 20px;
+    margin-right: 0;
+    max-width: 100%;
+  }
+
+  /* 手機字體大小調整 */
+  .section-1 h1 {
+    font-size: 60px; /* 原本是 60px，再小一點 */
+  }
+
+  .section h2 {
+    font-size: 32px;
+  }
+
+  .text-box h2 {
+    font-size: 32px;
+  }
+
+  .text-box p {
+    font-size: 16px;
+    line-height: 1.6;
+    letter-spacing: 0.1em;
+  }
+
+  .card-title {
+    font-size: 22px;
+  }
+
+  .card-content {
+    font-size: 15px;
+  }
+
+  .cards-wrapper {
+    flex-direction: column;
+    max-width: 100%;
+  }
+
+  .card {
+    max-width: 100%;
+    margin-bottom: 20px;
+    align-items: center;
+  }
+
+  .section-3 .content-wrapper {
+    padding-left: 0;
+    padding-right: 0;
+    align-items: center;
+  }
+
+  .section-3 .text-box {
+    max-width: 100%;
+  }
+  .content-wrapper {
+    gap: 15px;
+  }
+}
+
+
+
+    /* 半透明遮罩加在每個 .section 上 */
+  .section {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .section::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(78, 77, 77, 0.4); /* 半透明黑 */
+    z-index: 0;
+  }
+
+  .section > * {
+    position: relative;
+    z-index: 1;
+  }
+
+  /* 漢堡選單樣式：只在手機顯示 */
+.mobile-nav {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .mobile-nav {
+    position: fixed;
+    top: 15px;
+    right: 15px;
+    z-index: 100;
+    display: block;
+  }
+
+  .menu-icon {
+    font-size: 30px;
+    background-color: rgba(0, 0, 0, 0.6);
+    color: #fff;
+    padding: 10px 15px;
+    border-radius: 18px;
+    cursor: pointer;
+    user-select: none;
+  }
+
+  .menu-list {
+    display: none;
+    flex-direction: column;
+    position: absolute;
+    top: 50px;
+    right: 0;
+    background-color: rgba(30, 30, 30, 0.95);
+    border-radius: 10px;
+    padding: 10px;
+    list-style: none;
+    gap: 10px;
+    white-space: nowrap; /* 防止自動換行 */
+  }
+
+  .menu-list li {
+    margin: 8px 0;
+  }
+
+  .menu-list a {
+    color: #fff;
+    text-decoration: none;
+    font-size: 12px;
+    padding: 6px 12px;
+    display: block;
+    text-align: right;
+  }
+
+  .menu-list.show {
+    display: flex;
+  }
+  .content-wrapper {
+    gap: 20px;
+  }
+
+  .bg-image {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  object-fit: cover;
+  z-index: -1;
+}
+}
+
+/* iPad 螢幕大小偵測：寬度介於 768px 至 1024px */
+@media (min-width: 768px) and (max-width: 1024px) {
+  /* 針對 iPad 調整樣式 */
+
+  /* 例如改變文字大小 */
+  .section-1 h1 {
+    font-size: 80px;
+  }
+
+  .text-box h2 {
+    font-size: 40px;
+  }
+
+  /* 改變圖片大小和外觀 */
+  .image-box {
+    width: 85%;
+    height: auto;
+    max-width: 450px;
+    max-height: 450px;
+    border-radius: 30px;
+    box-shadow: 0 6px 12px rgba(0,0,0,0.4);
+  }
+
+  .text-box p {
+  max-width: 450px;
+  /* 如果想強制固定寬度也可以用 width: 400px; */
+}
+.cards-wrapper {
+  max-width: 600px;
+  margin: 0 auto; /* 如果想讓它置中 */
+}
+
+.bg-image {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  object-fit: cover;      /* 滿版又不變形 */
+  z-index: -1;            /* 放在最底層 */
+  filter: brightness(80%) contrast(100%); /* 跟你原本效果一致 */
+}
+
 /* 桌面版本調整 */
 @media (min-width: 1025px) {
   .image-box {
@@ -48,6 +462,151 @@
     font-size: 28px;
   }
 
+  .card-content {
+    font-size: 16px;
+  }
+}
+
+
+}
+
+
+  </style>
+</head>
+<body>
+  <img src="img/IMG_5046 2.png" class="bg-image" alt="背景圖">
+  <nav class="mobile-nav">
+  <div class="menu-icon" onclick="toggleMenu()">☰</div>
+  <ul class="menu-list">
+    <li><a href="Personal_Introduction.html" target="_blank">自我介紹</a></li>
+    <li><a href="skills.html" target="_blank">技能</a></li>
+    <li><a href="profile.html" target="_blank">作品集</a></li>
+  </ul>
+</nav>
+
+
+  <!-- 區塊 1 -->
+  <div class="section section-1">
+    <h2>Welcome to</h2>
+    <h1>Tiffany's</h1>
+    <h2>Profile</h2>
+  </div>
+
+  <!-- 區塊 2：自我介紹 -->
+  <div class="section section-2">
+    <div class="content-wrapper">
+      <div class="text-box">
+        <h2>About me</h2>
+        <p>
+          這是我與所愛之物的深刻連結：在書頁間漫遊思想，從花束中讀懂自然的詩句，更沉醉於顏料流淌的創作魔法。當色彩從管中擠出、在畫布綻放成花束的瞬間，平凡便轉化為極致的浪漫。書籍是靈魂的翅膀，花卉是生命的呼吸，而畫布承載著心跳般的筆觸——三者交融成我的調色盤，讓每個日常都如未乾的油彩般鮮活，既溫柔療癒自己，也將這份絢爛傳遞給世界。
+        </p>
+      </div>
+      <div class="image-box">
+        <img src="img/未命名的作品 13.png" alt="作品圖片" />
+      </div>
+    </div>
+  </div>
+
+  <!-- 區塊 3：聯絡資訊 -->
+  <div class="section section-3">
+    <div class="content-wrapper">
+      <div class="text-box">
+        <h2>Contacts</h2>
+      </div>
+      <div class="cards-wrapper">
+        <a href="Personal_Introduction.html" class="card" target="_blank" rel="noopener noreferrer">
+          <div class="card-title">Personal Introduction</div>
+          <div class="card-title">自我介紹</div>
+          <div class="card-divider"></div>
+          <div class="card-content">
+            Skilled in connecting with others, I explore design as a way to understand the world and myself. I aim to keep learning and expanding into a more diverse world. To me, the world is bold, design is dynamic, and both reflect my unique perspective.
+          </div>
+        </a>
+        <a href="skills.html" class="card" target="_blank" rel="noopener noreferrer">
+          <div class="card-title">Skills</div>
+          <div class="card-title">技能</div>
+          <div class="card-divider"></div>
+          <div class="card-content">
+            I've gained key skills in information management, including Python for data analysis, C++ for object-oriented programming, HTML/CSS for web design, and Unity/C# for game basics. These skills lay a strong foundation for my future studies and career.
+          </div>
+        </a>
+        <a href="profile.html" class="card" target="_blank" rel="noopener noreferrer">
+          <div class="card-title">Project Showcase</div>
+          <div class="card-title">作品集</div>
+          <div class="card-divider"></div>
+          <div class="card-content">
+            Project Showcase features a variety of creative works, including hand-drawn sketches, digital illustrations, 3D modeling, and photography, blending traditional and modern techniques to bring concepts to life with unique style.
+          </div>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- JS 放最後 -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      const imageBoxes = document.querySelectorAll('.image-box');
+
+      imageBoxes.forEach(box => {
+        box.addEventListener('click', function (e) {
+          // 關閉其他圖片
+          imageBoxes.forEach(b => {
+            if (b !== box) b.classList.remove('expanded');
+          });
+          // 切換展開狀態
+          box.classList.toggle('expanded');
+        });
+      });
+
+      // 點擊其他區域時收起圖片
+      document.addEventListener('click', function (e) {
+        if (!e.target.closest('.image-box')) {
+          imageBoxes.forEach(box => box.classList.remove('expanded'));
+        }
+      });
+    });
+
+    function toggleMenu() {
+  const menuList = document.querySelector('.menu-list');
+  menuList.classList.toggle('show');
+}
+
+    // 點擊其他區域時收起漢堡選單
+    document.addEventListener('click', function (e) {
+      const menuList = document.querySelector('.menu-list');
+      if (!e.target.closest('.menu-icon') && !e.target.closest('.menu-list')) {
+        menuList.classList.remove('show');
+      }
+    });
+
+    let menuTimeout = null;
+
+  function toggleMenu() {
+    const menuList = document.querySelector('.menu-list');
+    menuList.classList.toggle('show');
+
+    // 清除之前的計時器（避免重複）
+    clearTimeout(menuTimeout);
+
+    // 如果展開了，開始 5 秒計時後自動關閉
+    if (menuList.classList.contains('show')) {
+      menuTimeout = setTimeout(() => {
+        menuList.classList.remove('show');
+      }, 5000); // 5000ms = 5 秒
+    }
+  }
+
+  // 點擊外面時也要關閉選單
+  document.addEventListener('click', function (e) {
+    const menuList = document.querySelector('.menu-list');
+    if (!e.target.closest('.menu-icon') && !e.target.closest('.menu-list')) {
+      menuList.classList.remove('show');
+      clearTimeout(menuTimeout); // 同時清除定時器
+    }
+  });
+  </script>
+</body>
+</html>
   .card-content {
     font-size: 16px;
   }
