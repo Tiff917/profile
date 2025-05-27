@@ -654,19 +654,30 @@ window.addEventListener('scroll', () => {
     return;
   }
 
-  let currentScrollTop = window.pageYOffset || document.documentElement.scrollTop;
+  const mobileNav = document.querySelector('.mobile-nav');
+  let lastScrollTop = 0;
 
-  if (currentScrollTop > lastScrollTop) {
-    // 往下滑，隱藏漢堡
-    mobileNav.style.transform = 'translateY(-150%)';
-    mobileNav.style.transition = 'transform 0.3s ease';
-  } else {
-    // 往上滑，顯示漢堡
-    mobileNav.style.transform = 'translateY(0)';
-    mobileNav.style.transition = 'transform 0.3s ease';
-  }
+  window.addEventListener('scroll', () => {
+    const currentScrollTop = window.pageYOffset || document.documentElement.scrollTop;
 
-  lastScrollTop = currentScrollTop <= 0 ? 0 : currentScrollTop; // 防止負值
+    // 只在手機/平板尺寸時執行
+    if (window.innerWidth <= 800) {
+      if (currentScrollTop > lastScrollTop) {
+        // 往下滑，隱藏漢堡
+        mobileNav.style.transform = 'translateY(-150%)';
+        mobileNav.style.transition = 'transform 0.3s ease';
+      } else {
+        // 往上滑，顯示漢堡
+        mobileNav.style.transform = 'translateY(0)';
+        mobileNav.style.transition = 'transform 0.3s ease';
+      }
+    } else {
+      // 桌面狀態直接隱藏
+      mobileNav.style.transform = 'translateY(-150%)';
+    }
+
+    lastScrollTop = currentScrollTop <= 0 ? 0 : currentScrollTop;
+  });
 });
 
 
