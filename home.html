@@ -384,14 +384,14 @@ html, body {
   
   html, body {
     height: 100%;
-    min-width: 100%;
-    background-image: url('img/IMG_5046_2.png');
-    background-repeat: no-repeat;
-    background-position: center center;
-    background-size: cover;
-    background-attachment: fixed;
-    font-family: Arial, sans-serif;
-    color: #c7c3be;
+  min-height: 100vh;
+  background-image: url('img/IMG_5046_2.png');
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
+  /*background-attachment: fixed;*/
+  font-family: Arial, sans-serif;
+  color: #c7c3be;
   }
 
   /* 導航顯示 */
@@ -404,14 +404,13 @@ html, body {
   }
 }
 
-/* 響應式設計 - iPad (768px-1024px) */
 @media (min-width: 430px) and (max-width: 1024px) {
   .section-1 h1 {
-    font-size: 80px;
+    font-size: 70px;
   }
 
   .text-box h2 {
-    font-size: 40px;
+    font-size: 36px;
   }
 
   .image-box {
@@ -422,8 +421,18 @@ html, body {
     box-shadow: 0 6px 12px rgba(0,0,0,0.4);
   }
 
+  .text-box {
+    max-width: 90%;
+    padding: 0 15px;
+    margin: 0 auto;
+    box-sizing: border-box;
+  }
+
   .text-box p {
-    max-width: 450px;
+    max-width: 90%;
+    width: 100%;
+    word-wrap: break-word;
+    margin: 0 auto;
   }
 
   .cards-wrapper {
@@ -435,16 +444,30 @@ html, body {
     flex-direction: row;
     align-items: center;
     justify-content: center;
-    gap: 35px;           /* 減少間距 */
-    flex-wrap: wrap;     /* 允許換行 */
+    gap: 35px;
+    flex-wrap: wrap;
   }
 
   .footer-content a {
-    white-space: normal; /* 允許斷行 */
-    flex-shrink: 1;      /* 允許縮小 */
-    min-width: 0;        /* 防止寬度撐開 */
+    white-space: normal;
+    flex-shrink: 1;
+    min-width: 0;
+  }
+
+  .content-wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+    padding: 0 10px;
+  }
+
+  .image-box, .card {
+    max-width: 100%;
+    height: auto;
   }
 }
+
 
 /* 響應式設計 - 桌面 (>1024px) */
 @media (min-width: 1025px) {
